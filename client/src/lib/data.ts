@@ -35,31 +35,32 @@ export interface Player {
   wickets?: number;
   eco?: number;
   captain?: boolean;
+  vsOpponentStats?: Record<string, { runs: number, wickets: number }>; // Added for prediction logic
 }
 
 export const SQUADS: Record<string, Player[]> = {
   MI: [
-    { name:"Rohit Sharma",      role:"BAT", runs:6211, avg:29.6, sr:130.1, matches:243, captain:true },
-    { name:"Hardik Pandya",     role:"ALL", runs:1736, wickets:42, avg:26.2, sr:142.0, eco:8.8, matches:122 },
-    { name:"Suryakumar Yadav",  role:"BAT", runs:5019, avg:31.4, sr:148.1, matches:188 },
-    { name:"Jasprit Bumrah",    role:"BOWL", wickets:170, eco:7.41, avg:23.4, matches:143 },
+    { name:"Rohit Sharma",      role:"BAT", runs:6211, avg:29.6, sr:130.1, matches:243, captain:true, vsOpponentStats: { CSK: { runs: 800, wickets: 0 }, KKR: { runs: 1000, wickets: 0 } } },
+    { name:"Hardik Pandya",     role:"ALL", runs:1736, wickets:42, avg:26.2, sr:142.0, eco:8.8, matches:122, vsOpponentStats: { CSK: { runs: 300, wickets: 12 } } },
+    { name:"Suryakumar Yadav",  role:"BAT", runs:5019, avg:31.4, sr:148.1, matches:188, vsOpponentStats: { KKR: { runs: 500, wickets: 0 } } },
+    { name:"Jasprit Bumrah",    role:"BOWL", wickets:170, eco:7.41, avg:23.4, matches:143, vsOpponentStats: { CSK: { runs: 20, wickets: 25 }, RCB: { runs: 10, wickets: 30 } } },
     { name:"Tilak Varma",       role:"BAT", runs:897, avg:34.5, sr:141.2, matches:34 },
     { name:"Naman Dhir",        role:"BAT", runs:412, avg:28.1, sr:138.4, matches:18 },
     { name:"Robin Minz",        role:"WK",  runs:210, avg:26.2, sr:128.0, matches:12 },
     { name:"Deepak Chahar",     role:"BOWL", wickets:89, eco:7.43, avg:24.6, matches:91 },
   ],
   CSK: [
-    { name:"MS Dhoni",          role:"WK",  runs:5243, avg:38.1, sr:135.9, matches:250, captain:true },
-    { name:"Ruturaj Gaikwad",   role:"BAT", runs:2800, avg:36.4, sr:137.8, matches:87 },
-    { name:"Ravindra Jadeja",   role:"ALL", runs:2692, wickets:160, avg:26.6, sr:127.3, eco:7.61, matches:236 },
+    { name:"MS Dhoni",          role:"WK",  runs:5243, avg:38.1, sr:135.9, matches:250, captain:true, vsOpponentStats: { MI: { runs: 750, wickets: 0 }, RCB: { runs: 850, wickets: 0 } } },
+    { name:"Ruturaj Gaikwad",   role:"BAT", runs:2800, avg:36.4, sr:137.8, matches:87, vsOpponentStats: { MI: { runs: 400, wickets: 0 } } },
+    { name:"Ravindra Jadeja",   role:"ALL", runs:2692, wickets:160, avg:26.6, sr:127.3, eco:7.61, matches:236, vsOpponentStats: { MI: { runs: 350, wickets: 20 } } },
     { name:"Devon Conway",      role:"BAT", runs:925, avg:37.0, sr:139.5, matches:28 },
     { name:"Rachin Ravindra",   role:"ALL", runs:744, wickets:18, avg:31.0, sr:141.0, eco:8.3, matches:28 },
-    { name:"Shivam Dube",       role:"ALL", runs:1100, wickets:20, avg:32.0, sr:156.0, eco:9.2, matches:58 },
+    { name:"Shivam Dube",       role:"ALL", runs:1100, wickets:20, avg:32.0, sr:156.0, eco:9.2, matches:58, vsOpponentStats: { RCB: { runs: 300, wickets: 2 } } },
     { name:"Matheesha Pathirana",role:"BOWL", wickets:59, eco:8.12, avg:21.3, matches:36 },
     { name:"Khaleel Ahmed",     role:"BOWL", wickets:74, eco:8.45, avg:26.8, matches:62 },
   ],
   RCB: [
-    { name:"Virat Kohli",       role:"BAT", runs:7624, avg:37.3, sr:130.1, matches:243, captain:true },
+    { name:"Virat Kohli",       role:"BAT", runs:7624, avg:37.3, sr:130.1, matches:243, captain:true, vsOpponentStats: { CSK: { runs: 1050, wickets: 0 }, MI: { runs: 900, wickets: 0 } } },
     { name:"Rajat Patidar",     role:"BAT", runs:1024, avg:33.6, sr:148.2, matches:38 },
     { name:"Glenn Maxwell",     role:"ALL", runs:2178, wickets:36, avg:22.5, sr:154.0, eco:8.5, matches:111 },
     { name:"Phil Salt",         role:"WK",  runs:1230, avg:35.1, sr:162.3, matches:42 },
@@ -70,8 +71,8 @@ export const SQUADS: Record<string, Player[]> = {
   ],
   KKR: [
     { name:"Ajinkya Rahane",    role:"BAT", runs:3872, avg:31.3, sr:126.0, matches:148, captain:true },
-    { name:"Sunil Narine",      role:"ALL", runs:1445, wickets:182, avg:14.9, sr:163.0, eco:6.67, matches:177 },
-    { name:"Andre Russell",     role:"ALL", runs:2245, wickets:94, avg:29.4, sr:179.4, eco:9.2, matches:119 },
+    { name:"Sunil Narine",      role:"ALL", runs:1445, wickets:182, avg:14.9, sr:163.0, eco:6.67, matches:177, vsOpponentStats: { MI: { runs: 150, wickets: 25 } } },
+    { name:"Andre Russell",     role:"ALL", runs:2245, wickets:94, avg:29.4, sr:179.4, eco:9.2, matches:119, vsOpponentStats: { MI: { runs: 250, wickets: 12 } } },
     { name:"Rinku Singh",       role:"BAT", runs:1120, avg:44.8, sr:148.7, matches:48 },
     { name:"Venkatesh Iyer",    role:"ALL", runs:1248, wickets:12, avg:29.0, sr:142.0, eco:9.1, matches:57 },
     { name:"Varun Chakravarthy",role:"BOWL", wickets:83, eco:7.25, avg:22.4, matches:62 },
@@ -139,6 +140,18 @@ export const SQUADS: Record<string, Player[]> = {
     { name:"Avesh Khan",        role:"BOWL", wickets:81, eco:9.02, avg:26.4, matches:66 },
   ],
 };
+
+export const VENUE_STATS: Record<string, Record<string, { winRate: number, firstInningsAvg: number }>> = {
+  "Wankhede Stadium, Mumbai": {
+    MI: { winRate: 65, firstInningsAvg: 185 },
+    CSK: { winRate: 45, firstInningsAvg: 172 },
+  },
+  "M. Chinnaswamy Stadium, Bengaluru": {
+    RCB: { winRate: 55, firstInningsAvg: 190 },
+    KKR: { winRate: 50, firstInningsAvg: 182 },
+  }
+};
+
 
 export const SCHEDULE = [
   { id:1,  t1:"MI",   t2:"CSK",  date:"Mar 22, 2025", time:"7:30 PM", venue:"Wankhede Stadium, Mumbai",              status:"upcoming", no:1 },
