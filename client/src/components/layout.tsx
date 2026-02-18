@@ -15,9 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-amber-50 flex flex-col md:flex-row">
       {/* Mobile Header */}
-      <header className="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-200 sticky top-0 z-50">
+      <header className="md:hidden flex items-center justify-between p-4 bg-white/80 backdrop-blur-md border-b border-purple-100 sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-display font-bold">IPL</div>
           <span className="font-display font-bold text-xl text-slate-900">PREDICTOR</span>
@@ -49,9 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 h-screen sticky top-0">
+      <aside className="hidden md:flex flex-col w-64 bg-white/40 backdrop-blur-xl border-r border-purple-100 h-screen sticky top-0">
         <div className="p-6 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg shadow-blue-200">IPL</div>
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-amber-500 flex items-center justify-center text-white font-display font-bold text-lg shadow-lg shadow-purple-200">IPL</div>
           <span className="font-display font-bold text-2xl text-slate-900 tracking-tight">PREDICTOR</span>
         </div>
         
@@ -61,8 +61,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium cursor-pointer group",
                 location === item.href 
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-200" 
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200" 
+                  : "text-slate-500 hover:bg-white/60 hover:text-slate-900"
               )}>
                 <item.icon className={cn("w-5 h-5", location === item.href ? "text-white" : "text-slate-400 group-hover:text-slate-600")} />
                 {item.label}
